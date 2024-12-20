@@ -1,0 +1,47 @@
+﻿@model List<HastaneRandevuSistemi.Models.Emergency>
+@{
+	Layout = "/Views/Layout/InstructorIndex.cshtml";
+    int count = 0;
+}
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Acil Durumlar Listesi</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-sub">
+                            Acil durumlarla ilgili aşağıdaki listeyi görüntüleyebilirsiniz:
+                        </div>
+                        <table class="table mt-5">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Başlık</th>
+                                    <th scope="col">Açıklama</th>
+                                    <th scope="col">Bildirim Tarihi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var emergency in Model)
+                                {
+                                    count++;
+                                    <tr>
+                                        <td>@count</td>
+                                        <td>@emergency.Title</td>
+                                        <td>@emergency.Description</td>
+                                        <td>@emergency.SendDate.ToShortDateString()</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                        <td><a href="@Url.Action("Create", "Emergency")" class="btn btn-primary">Yeni Acil Durum Ekle</a></td>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

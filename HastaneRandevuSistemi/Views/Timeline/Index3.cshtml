@@ -1,0 +1,159 @@
+﻿@model HastaneRandevuSistemi.Models.CalendarViewModel
+@{
+    Layout = "/Views/Layout/AssistantIndex.cshtml";
+}
+
+
+<meta charset="UTF-8">
+<!-- FullCalendar CSS -->
+<link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.css" rel="stylesheet" />
+
+<!-- FullCalendar JS -->
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/main.min.js"></script>
+
+<!-- FullCalendar Türkçe Dil Dosyası -->
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.0/locales/tr.js"></script>
+
+<!-- Takvim Alanı -->
+<div id="calendar"></div>
+<system.web>
+    <globalization fileEncoding="utf-8" requestEncoding="utf-8" responseEncoding="utf-8" culture="tr-TR" uiCulture="tr-TR"/>
+</system.web>
+<!-- Modal (Açılır Pencere) -->
+<div id="eventModal" class="modal" style="display:none;">
+    <div class="modal-content">
+        <span class="close" id="closeModal">&times;</span>
+        <h4>Randevu Detayları</h4>
+        <p><strong>Asistan:</strong> <span id="assistantName"></span></p>
+        <p><strong>Öğretim Üyesi:</strong> <span id="instructorName"></span></p>
+        <p><strong>Tarih:</strong> <span id="appointmentDate"></span></p>
+        <p><strong>Saat:</strong> <span id="appointmentTime"></span></p>
+    </div>
+</div>
+<div id="eventModal2" class="modal" style="display:none;">
+    <div class="modal-content">
+        <span class="close" id="closeModal">&times;</span>
+        <h4>Nöbet Detayları</h4>
+        <p><strong>Asistan:</strong> <span id="assistantName"></span></p>
+        <p><strong>Tarih:</strong> <span id="shiftDate"></span></p>
+        <p><strong>Saat Aralığı:</strong> <span id="timeSlot"></span></p>
+    </div>
+</div>
+
+<script>
+    // Takvim oluşturulması
+    document.addEventListener('DOMContentLoaded', function () {
+        var calendarEl = document.getElementById('calendar');
+
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth', // İlk açıldığında ay görünümü
+            locale: 'tr', // Dil Türkçe'ye ayarlandı
+            lang:'tr',
+            events: [
+                @foreach (var appointment in Model.Appointments)
+                {
+                    
+                    <text>
+                        {
+                            title: 'Randevu~@Html.Raw(appointment.Instructor.NameSurname)~@appointment.TimeSlot',  // Randevu başlığı
+                            date: '@appointment.ShiftDate.ToString("yyyy-MM-dd")',  // Randevu tarihi
+                            description: 'Randevu için @Html.Raw(appointment.Instructor.NameSurname) ile görüşme', // Ekstra açıklama
+                            assistant: '@Html.Raw(appointment.Assistant.NameSurname)', // Asistan adı
+                            instructor: '@Html.Raw(appointment.Instructor.NameSurname)', // Öğretim üyesi adı
+                            appointmentDate: '@Html.Raw(appointment.ShiftDate.ToString("dd MMMM yyyy", new System.Globalization.CultureInfo("tr-TR")))', // Tarih formatı
+                            appointmentTime: '@appointment.TimeSlot', // Saat dilimi
+                            type: 'appointment', // Etkinlik tipi
+                        },
+                    </text>
+                }
+                @foreach (var shift in Model.Shifts)
+                {
+                    
+                    <text>
+                        {
+                            title: 'Nöbet ~ @shift.ShiftDuration',  // Randevu başlığı
+                            date: '@shift.ShiftDate.ToString("yyyy-MM-dd")',  // Randevu tarihi
+                            description: '@Html.Raw(shift.ShiftDate.ToString("yyyy-MM-dd")) tarihinde nöbetiniz var.', // Ekstra açıklama
+                            assistant: '@Html.Raw(shift.Assistant.NameSurname)', // Asistan adı
+                            shiftDate: '@Html.Raw(shift.ShiftDate.ToString("dd MMMM yyyy", new System.Globalization.CultureInfo("tr-TR")))', // Tarih formatı
+                            shiftTime: '@shift.ShiftDuration', // Saat dilimi
+                            type: 'shift', // Etkinlik tipi
+                        },
+                    </text>
+                }
+            ],
+            editable: true, // Randevuların düzenlenebilir olması
+            droppable: true, // Sürükleyip bırakma özelliği
+            eventClick: function(info) {
+                // Randevuya tıklanınca modalı göster
+                document.getElementById('assistantName').innerText = info.event.extendedProps.assistant;
+                document.getElementById('instructorName').innerText = info.event.extendedProps.instructor;
+                document.getElementById('appointmentDate').innerText = info.event.extendedProps.appointmentDate;
+                document.getElementById('appointmentTime').innerText = info.event.extendedProps.appointmentTime;
+                document.getElementById('eventModal').style.display = 'block';
+            }
+        });
+
+        calendar.render();
+    });
+    // Modal'ı kapatmak için fonksiyon
+    document.getElementById('closeModal').addEventListener('click', function () {
+    document.getElementById('eventModal').style.display = 'none';
+    });
+
+    // Modal dışına tıklanırsa kapanması için
+    window.onclick = function(event) {
+        if (event.target == document.getElementById('eventModal')) {
+            document.getElementById('eventModal').style.display = 'none';
+        }
+    }
+</script>
+
+<!-- Modal için basit stil -->
+<style>
+    /* Modal Stilleri */
+    .modal {
+        display: none; 
+        position: fixed; 
+        z-index: 1; 
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto; 
+        background-color: rgb(0,0,0); 
+        background-color: rgba(0,0,0,0.4); 
+    }
+
+    .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+    }
+
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    /* Takvim Stilleri */
+    #calendar {
+        max-width: 80%; /* Takvimin genişliği (%80 yaparak küçültülmüş görünüyor) */
+        margin: 0 auto; /* Ortalamak için */
+        padding: 10px; /* Çerçeve boşluğu */
+        background-color: #f9f9f9; /* Hafif arka plan rengi */
+        border: 1px solid #ddd; /* Çerçeve stili */
+        border-radius: 10px; /* Köşe yuvarlama */
+    }
+</style>

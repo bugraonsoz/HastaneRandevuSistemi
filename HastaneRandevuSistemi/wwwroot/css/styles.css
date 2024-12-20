@@ -1,0 +1,53 @@
+﻿body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    max-height: 300vh; /* Ekran yüksekliği kadar sınırla */
+    overflow-y: auto; /* Dikey kaydırma etkin */
+}
+
+header {
+    background-color: #007bff;
+}
+
+h3 {
+    color: #007bff;
+}
+
+.list-group-item {
+    font-size: 1.1em;
+}
+
+footer {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+.bg-primary {
+    background-color: rgb(2, 80, 196) !important;
+}
+.list-group-item {
+    color:#e8e6e3;
+    text-decoration-color: initial;
+    background-color: #181a1b;
+}
+.container > .row {
+    margin-bottom: 20px;
+}
+
+.list-group-item {
+    margin-bottom: 10px;
+}
+html, body {
+    height: 100%;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.container > .row {
+    flex-grow: 1;
+    overflow-y: auto;
+}

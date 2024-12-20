@@ -1,0 +1,26 @@
+﻿@model HastaneRandevuSistemi.Models.Appointment
+
+@{
+    ViewBag.Title = "Randevu Oluştur";
+    Layout = "/Views/Layout/AssistantIndex.cshtml";
+}
+
+<h2>Yeni Randevu Oluştur</h2>
+
+<form asp-action="Create3" method="post">
+    <div class="form-group">
+        <label for="InstructorID">Öğretim Üyesi</label>
+        <select asp-for="InstructorId" asp-items="ViewBag.Instructors" class="form-control">
+            <option value="">Seçiniz</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="Date">Tarih</label>
+        <input asp-for="ShiftDate" class="form-control" type="date" />
+    </div>
+    <div class="form-group">
+        <label for="Time">Saat Aralığı</label>
+        <input asp-for="TimeSlot" class="form-control" type="text" />
+    </div>
+    <button type="submit" class="btn btn-primary">Kaydet</button>
+</form>

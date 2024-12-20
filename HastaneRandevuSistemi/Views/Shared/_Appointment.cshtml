@@ -1,0 +1,14 @@
+﻿@model List<HastaneRandevuSistemi.Models.AppointmentInfos>
+
+@foreach (var item in Model)
+{
+    <div class="card">
+        <div class="card-body">
+            <h4>Son Eklenen Randevu</h4>
+            <p>Doktor: <strong>@item.InstructorTitle @item.InstructorName</strong></p>
+            <p>Asistan: <strong>@item.AssistantTitle @item.AssistantName</strong></p>
+            <p>Tarih: @item.MeetDate.ToShortDateString()</p>
+            <p>Saat: @item.TimeSlot</p>
+        </div>
+    </div>
+}

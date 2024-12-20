@@ -1,0 +1,60 @@
+﻿@model List<HastaneRandevuSistemi.Models.AppointmentInfos>
+
+@{
+    Layout = "/Views/Layout/AssistantIndex.cshtml";
+    int count = 0;
+}
+
+<div class="content">
+    <div class="container-fluid">
+        <h4 class="page-title">Randevular</h4>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Randevu Listesi</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-sub">
+                            Randevular ile ilgili işlemleri aşağıdaki panelden yapabilirsiniz:
+                        </div>
+                        <table class="table mt-5">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Öğretim Üyesi</th>
+                                    <th scope="col">Tarih</th>
+                                    <th scope="col">Saat Aralığı</th>
+                                    <th scope="col">Sil</th>
+                                    <th scope="col">Güncelle</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    count++;
+                                    <tr>
+                                        <td>@count</td>
+                                        <td>@item.InstructorTitle @item.InstructorName</td>
+                                        <td>@item.MeetDate.ToShortDateString()</td>
+                                        <td>@item.TimeSlot</td>
+                                        <td>
+                                            <a asp-action="Delete3" asp-route-id="@item.Id" class="btn btn-danger" onclick="return confirm('Bu randevuyu silmek istediğinize emin misiniz?')">Sil</a>
+                                        </td>
+                                        <td>
+                                            <a asp-action="Update3" asp-route-id="@item.Id" class="btn btn-success">Güncelle</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                        <div class="mt-3">
+                            <a asp-action="Create3" class="btn btn-primary">Yeni Randevu Girişi</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,21 @@
+﻿@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Giriş Yapın.</h1>
+<div class="login-box" style="height: 50vh;">
+    <h4 class="login-text">Giriş</h4>
+    <center>
+        <input placeholder="Kullanıcı Adı" />
+        <input placeholder="Şifre" />
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="rememberMe" />
+            <label class="form-check-label" for="rememberMe">
+                Beni hatırla
+            </label>
+        </div>
+        <!-- Giriş Yap Butonuna Yönlendirme -->
+		<button><a class="btn btn-primary" asp-controller="Home" asp-action="AdminPage" style="text-decoration: none;">Giriş Yap</a></button>
+        <button id="btn-forgot">Şifremi unuttum!</button>
+    </center>
+</div>

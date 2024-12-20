@@ -1,0 +1,93 @@
+﻿@model HastaneRandevuSistemi.Models.DepAsIns
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bölüm Tanıtım Sayfası</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="bg-primary text-white text-center py-3">
+        <h1>Bölümlerin Tanıtım Sayfası</h1>
+    </header>
+
+    <!-- Bölüm Bilgileri -->
+    <div class="container mt-4">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="bolum-tab" data-bs-toggle="tab" data-bs-target="#bolum" type="button" role="tab" aria-controls="bolum" aria-selected="true">Bölüm Bilgileri</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="instructor-tab" data-bs-toggle="tab" data-bs-target="#doktor" type="button" role="tab" aria-controls="doktor" aria-selected="false">Görevli Öğretim Üyeleri</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="asistan-tab" data-bs-toggle="tab" data-bs-target="#asistan" type="button" role="tab" aria-controls="asistan" aria-selected="false">Görevli Asistanlar</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="iletisim-tab" data-bs-toggle="tab" data-bs-target="#iletisim" type="button" role="tab" aria-controls="iletisim" aria-selected="false">İletişim</button>
+            </li>
+        </ul>
+
+        <div class="tab-content mt-3" id="myTabContent">
+            <!-- Bölüm Bilgileri Tab -->
+            <div class="tab-pane fade show active" id="bolum" role="tabpanel" aria-labelledby="bolum-tab">
+                <h3 style="color: #e8e6e3;">Bölüm Bilgileri</h3>
+                <ul class="list-group">
+                    @foreach (var department in Model.Departments.OrderBy(d => d.Name))
+                    {
+                       
+                            var emptyBeds = department.Capacity - department.CurrentPatient;
+                       
+
+                        <li class="list-group-item" style="color:#e8e6e3; background-color: #181a1b;">
+                            <strong>@department.Name</strong>~@department.Description<br>
+                            Mevcut Hasta Sayısı: <strong>@department.CurrentPatient</strong><br>
+                            Boş Yatak Sayısı: <strong>@emptyBeds</strong><br>
+                            Toplam Kapasite: <strong>@department.Capacity</strong>
+                        </li>
+                    }
+                </ul>
+            </div>
+            <!-- Görevli Doktorlar Tab -->
+            <div class="tab-pane fade" id="doktor" role="tabpanel" aria-labelledby="instructor-tab">
+                <h3 style="color: #e8e6e3;">Görevli Öğretim Üyeleri</h3>
+                <ul class="list-group">
+                    @foreach (var item in Model.Instructors.OrderBy(a => a.Department.Name))
+                    {
+                        <li class="list-group-item" style="color:#e8e6e3; background-color: #181a1b;">
+							<strong>@item.Title @item.NameSurname</strong> ~ @item.Department.Name ~ <strong><i>Ulaşın: @item.Phone - @item.Email</i></strong> <br>
+                        </li>
+                    }
+                </ul>
+            </div>
+            <!-- Görevli Asistanlar Tab -->
+            <div class="tab-pane fade" id="asistan" role="tabpanel" aria-labelledby="asistan-tab">
+                <h3 style="color: #e8e6e3;">Görevli Asistanlar</h3>
+                <ul class="list-group">
+                    @foreach (var item in Model.Assistants.OrderBy(a => a.Department.Name))
+                    {
+                        <li class="list-group-item" style="color:#e8e6e3; background-color: #181a1b;">
+                            <strong>@item.Title @item.NameSurname</strong> ~ @item.Department.Name ~ <strong><i>Ulaşın: @item.Phone - @item.Email</i></strong> <br>
+                        </li>
+                    }
+                </ul>
+            </div>
+
+            <!-- İletişim Tab -->
+            <div class="tab-pane fade" id="iletisim" role="tabpanel" aria-labelledby="iletisim-tab">
+                <h3 style="color: #e8e6e3;">İletişim ve Bölüm Kuralları</h3>
+                <p style="color: #e8e6e3;"><strong>Telefon:</strong> 123-456-7890</p>
+                <p style="color: #e8e6e3;"><strong>Email:</strong> cocukacil@hastane.com</p>
+                <p style="color: #e8e6e3;"><strong>Ziyaret Saatleri:</strong> 16:00 - 18:00</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

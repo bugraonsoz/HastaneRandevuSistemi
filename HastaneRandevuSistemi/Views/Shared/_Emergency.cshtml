@@ -1,0 +1,14 @@
+﻿@model HastaneRandevuSistemi.Models.Emergency
+
+@if (Model != null)
+{
+    <div class="alert alert-danger">
+        <h4>Son Eklenen Acil Durum</h4>
+        <p><strong>@Model.Title</strong></p>
+        <p>@Model.Description</p>
+    </div>
+}
+else
+{
+    <p>Şu anda bir acil durum yok.</p>
+}

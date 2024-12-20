@@ -1,0 +1,116 @@
+﻿@{
+    ViewData["Title"] = "Index";
+}
+@if (ViewBag.Mesaj != null)
+{
+    <div class="alert alert-danger">
+        @ViewBag.Mesaj
+    </div>
+}
+<h1 class="text-center text-light mt-5">Sayın Asistan, Giriş Yapın.</h1>
+
+<div class="login-box">
+    <h4 class="login-text">Giriş</h4>
+
+    <form method="post">
+        <div class="form-group">
+            <input placeholder="Kullanıcı Adı" type="text" class="form-control" id="Username" name="Username" required />
+        </div>
+
+        <div class="form-group">
+            <input placeholder="Şifre" type="password" class="form-control" id="Password" name="Password" required />
+        </div>
+        <div class="text-center mt-4">
+            <button type="submit" class="btn btn-primary btn-block">Giriş Yap</button>
+        </div>
+    </form>
+</div>
+
+<!-- Estetik CSS -->
+<style>
+    body {
+        background-color: #1e2122;
+        font-family: 'Arial', sans-serif;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+        color: #c8c3bc;
+    }
+
+    .login-box {
+        background-color: #1e2122;
+        width: 350px;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        margin: 50px auto;
+    }
+
+    .login-text {
+        color: #c8c3bc;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        font-size: 1.1rem;
+        margin-bottom: 8px;
+    }
+
+    .form-control {
+        border-radius: 5px;
+        padding: 10px;
+        background-color: #3e4446;
+        color: #fff;
+        border: 1px solid #2e3435;
+    }
+
+        .form-control:focus {
+            background-color: #3e4446;
+            border-color: #5c6b6d;
+        }
+
+    .form-check-input {
+        margin-right: 10px;
+    }
+
+    .btn-primary {
+        background-color: #3498db;
+        border-color: #2980b9;
+        width: 100%;
+        padding: 12px;
+        font-size: 1.2rem;
+        border-radius: 5px;
+    }
+
+        .btn-primary:hover {
+            background-color: #2980b9;
+        }
+
+    .btn-link {
+        background: none;
+        border: none;
+        padding: 0;
+        font-size: 1rem;
+        text-decoration: underline;
+    }
+
+        .btn-link:hover {
+            color: #e74c3c;
+        }
+
+    #btn-forgot {
+        background-color: darkred;
+        color: #fff;
+        font-size: 1rem;
+        width: 100%;
+        padding: 10px;
+        border-radius: 5px;
+        border: none;
+    }
+
+        #btn-forgot:hover {
+            background-color: #c0392b;
+        }
+</style>

@@ -1,0 +1,32 @@
+﻿@model Shift
+@{
+    Layout = "/Views/Layout/Index.cshtml";
+}
+
+<h1>Yeni Nöbet Ekle</h1>
+<form asp-action="CreateShift" method="post">
+    <div class="form-group">
+        <label for="AssistantId">Asistan Seçin</label>
+        <select asp-for="AssistantId" class="form-control" asp-items="ViewBag.Assistants">
+            <option value="">-- Asistan Seçin --</option>
+        </select>
+    </div>
+
+    <!-- Departman ismini göstereceğiz -->
+    <div class="form-group" id="departmentName" style="display:none;">
+        <label for="DepartmentName">Departman Adı</label>
+        <input type="text" class="form-control" id="DepartmentName" disabled />
+    </div>
+
+    <div class="form-group">
+        <label for="ShiftDate">Nöbet Tarihi</label>
+        <input type="date" asp-for="ShiftDate" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label for="ShiftDuration">Nöbet Süresi</label>
+        <input type="text" asp-for="ShiftDuration" class="form-control" placeholder="Örnek: 08:00-16:00" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Kaydet</button>
+</form>

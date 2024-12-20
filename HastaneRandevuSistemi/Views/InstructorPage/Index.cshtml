@@ -1,0 +1,243 @@
+﻿@model HastaneRandevuSistemi.Models.DepAsIns
+
+@{
+    Layout = "~/Views/Layout/InstructorIndex.cshtml";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Instructor Page</title>
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no" name="viewport" />
+    <link rel="stylesheet" href="~/Ready-Bootstrap-Dashboard-master/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:200,300,400,600,700,800,900">
+    <link rel="stylesheet" href="~/Ready-Bootstrap-Dashboard-master/assets/css/ready.css">
+    <link rel="stylesheet" href="~/Ready-Bootstrap-Dashboard-master/assets/css/demo.css">
+    <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        button {
+            border-radius: 20px;
+            transition: background-color 0.3s, color 0.3s;
+            padding: 12px 20px;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+            button:hover {
+                background-color: #343a40;
+                color: white;
+            }
+
+        .card {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            border-radius: 15px;
+            margin-bottom: 20px;
+            transition: transform 0.3s;
+        }
+
+            .card:hover {
+                transform: translateY(-5px);
+            }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .card .card-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: black;
+        }
+
+        .card .card-category {
+            font-size: 1rem;
+            color: black;
+        }
+
+        .card .numbers {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .department-name {
+            color: #007bff;
+            font-weight: bold;
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+
+        .department-content {
+            display: none; /* Varsayılan olarak gizli */
+            margin-top: 20px;
+        }
+
+        .department-title {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #007bff;
+            margin-bottom: 10px;
+        }
+
+        media (max-width: 768px) {
+            .card
+
+        {
+            margin-bottom: 15px;
+        }
+
+        .department-title {
+            font-size: 1.2rem;
+        }
+
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="main-panel">
+            <div class="content" style="margin-left: -100px;">
+                <div class="container-fluid">
+
+                    <!-- Departman Filtre Butonları -->
+                    <div class="row mb-4">
+                        <div class="col-12">
+                            <button class="btn btn-secondary" onclick="showAllDepartments()" style="background-color: #343a40;">Tüm Departmanlar</button>
+                            @foreach (var department in Model.Departments)
+                            {
+                                <button class="btn btn-secondary" onclick="filterDepartment('@department.Name')" style="background-color: crimson;">
+                                    @department.Name
+                                </button>
+                            }
+                        </div>
+                    </div>
+
+                    <!-- Departman Kartları -->
+                    @foreach (var department in Model.Departments)
+                    {
+                        var emptyBeds = department.Capacity - department.CurrentPatient;
+                        <div class="department-content" id="department-@department.Name.Replace(" ", "")">
+                            <div class="row">
+                                <!-- Departman adı ilk kartın en başına ekleniyor -->
+                                <div class="col-12">
+                                    <div class="department-name">@department.Name</div>
+                                </div>
+
+                                <div class="col-md-6 col-lg-3">
+                                    <div class="card card-stats card-warning">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-5">
+                                                    <div class="icon-big text-center">
+                                                        <i class="la la-users"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="col-7 d-flex align-items-center">
+                                                    <div class="numbers">
+                                                        <p class="card-category">Mevcut Hasta Sayısı</p>
+                                                        <h4 class="card-title">@department.CurrentPatient</h4>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-3">
+                                    <div class="card card-stats card-success">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-5">
+                                                    <div class="icon-big text-center">
+                                                        <i class="la la-user-md"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="col-7 d-flex align-items-center">
+                                                    <div class="numbers">
+                                                        <p class="card-category">Doktor Sayısı</p>
+                                                        <h4 class="card-title">@department.Instructors.Count()</h4>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-3">
+                                    <div class="card card-stats card-danger">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-5">
+                                                    <div class="icon-big text-center">
+                                                        <i class="la la-graduation-cap"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="col-7 d-flex align-items-center">
+                                                    <div class="numbers">
+                                                        <p class="card-category">Asistan Sayısı</p>
+                                                        <h4 class="card-title">@department.Assistants.Count()</h4>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-3">
+                                    <div class="card card-stats card-primary">
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-5">
+                                                    <div class="icon-big text-center">
+                                                        <i class="la la-check-circle"></i>
+                                                    </div>
+                                                </div>
+                                                <div class="col-7 d-flex align-items-center">
+                                                    <div class="numbers">
+                                                        <p class="card-category">Boş Yatak Sayısı</p>
+                                                        <h4 class="card-title">@emptyBeds</h4>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scriptler -->
+    <script>
+        // Tüm departmanları göster
+        function showAllDepartments() {
+            document.querySelectorAll('.department-content').forEach(department => {
+                department.style.display = 'block';
+            });
+        }
+
+        // Belirli bir departmanı göster
+        function filterDepartment(departmentName) {
+            document.querySelectorAll('.department-content').forEach(department => {
+                department.style.display = 'none'; // Hepsini gizle
+            });
+            document.getElementById(`department-${departmentName.replace(/\s+/g, '')}`).style.display = 'block'; // Seçili departmanı göster
+        }
+
+        // Sayfa yüklendiğinde tüm departmanları göster
+        document.addEventListener('DOMContentLoaded', () => {
+            showAllDepartments();
+        });
+    </script>
+
+    <script src="~/Ready-Bootstrap-Dashboard-master/assets/js/core/jquery.3.2.1.min.js"></script>
+    <script src="~/Ready-Bootstrap-Dashboard-master/assets/js/core/popper.min.js"></script>
+    <script src="~/Ready-Bootstrap-Dashboard-master/assets/js/core/bootstrap.min.js"></script>
+</body>
+</html>

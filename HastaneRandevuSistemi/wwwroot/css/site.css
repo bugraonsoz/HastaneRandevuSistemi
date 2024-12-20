@@ -1,0 +1,228 @@
+﻿html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+/* Buton Focus ve Active Durumları */
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+/* Hover efekti */
+.hover-btn:hover {
+    transform: scale(1.1); /* Buton üzerine gelince %10 büyüme */
+    transition: transform 0.2s ease; /* Yumuşak geçiş efekti */
+}
+
+/* Genel HTML ve Body stil ayarları */
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+    box-sizing: border-box;
+    font-family: 'Lato', Arial, sans-serif;
+    text-align: center;
+    color: #333;
+    background: linear-gradient(135deg, #c6e2ff, #e0c3fc); /* Arka plan gradient */
+}
+
+h1 {
+    margin-top: 10vh; /* Başlık için biraz daha fazla mesafe ekleyerek aşağıya kaydır */
+    font-size: 2.5em; /* Başlık boyutunu biraz büyütülebilir */
+    color: #333; /* Yazı rengi ayarlanabilir */
+}
+
+h4 {
+    margin-top: 1em;
+    color: #333;
+    font-size: 150%;
+    font-weight: 300;
+    text-align: center;
+}
+
+
+input {
+    display: block;
+    width: 80%;
+    height: 40px;
+    margin-top: 1.0em;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+    input:focus {
+        border-color: #3498db;
+        box-shadow: 0 0 5px #3498db;
+    }
+
+/* Small yazılar */
+small {
+    display: inline-block;
+    margin-top: 5px;
+    color: white;
+    font-size: 100%;
+}
+
+/* Giriş kutusunun stil ayarları */
+/* Giriş kutusunun tam ortalanması için */
+.login-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50vh; /* Yüksekliği koruyarak, içerik dikeyde ortalanacak */
+    margin-top: 10vh; /* Üstten biraz mesafe ekleyerek sayfada ortalama */
+    flex-direction: column; /* İçeriği dikeyde hizala */
+    background-color: #f4f4f4; /* Arka plan rengi eklenebilir */
+    padding: 2em;
+    border-radius: 8px; /* Köşeleri yuvarlat */
+}
+
+/**//* Dış kutu stil ayarları */
+.outer-box {
+    display: block;
+    margin: auto;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    width: 80%;
+    max-width: 500px;
+    height: auto;
+    padding: 3em;
+}/* Giriş butonu */
+#btn-login {
+    display: block;
+    width: 100%;
+    border: none;
+    height: 45px;
+    margin-top: 2.0em;
+    border-radius: 5px;
+    background-color: transparent; /* Tek renk mavi */
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border: none; /* Dış çerçeveyi kaldır */
+    transition: background-color 0.3s ease;
+}
+
+
+
+#btn-login:focus {
+    outline: none; /* Dış çizgiyi tamamen kaldır */
+}
+
+
+/* Şifre unuttum butonu */
+#btn-forgot {
+    display: block;
+    border: none;
+    width: 100%;
+    margin-top: 1.0em;
+    border-radius: 5px;
+    color: #fff;
+    background-color: #e74c3c;
+}
+.form-check {
+    display: flex;
+    justify-content: center;
+    margin-top: 1em;
+    color: #333;
+}
+
+.form-check-input {
+    margin-right: 8px;
+}
+
+.form-check-label {
+    font-size: 1rem;
+    color: #333;
+    cursor: pointer;
+}
+.form-check-input:focus {
+    outline: none;
+    box-shadow: none;
+}
+.navbar {
+    background-color: #5c6bc0; /* Soft Blue */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+    color: #ffffff !important;
+    font-weight: 600;
+    font-size: 1.6em;
+    text-align: center;
+    width: 100%;
+    display: inline-block;
+}
+
+.navbar-collapse {
+    justify-content: flex-end;
+}
+
+.navbar-nav .nav-item .nav-link {
+    color: #f5f5f5 !important;
+    font-weight: 500;
+}
+
+    .navbar-nav .nav-item .nav-link:hover {
+        color: #ffee58 !important; /* Highlight on hover */
+    }
+
+footer {
+    background-image: linear-gradient(135deg, rgb(40, 43, 45), rgb(42, 45, 47));
+    color: #4a4a4a;
+    text-align: center;
+    padding: 10px 0;
+}
+
+    footer a {
+        color: #5c6bc0;
+        text-decoration: none;
+    }
+
+        footer a:hover {
+            color: #ffee58;
+        }
+
+.text-muted {
+    --darkreader-text--bs-text-opacity: 1;
+    color: rgb(158, 150, 137) !important;
+}
+/* Yumuşak geçişler */
+a {
+    transition: all 0.3s ease;
+}
+
+/* Genel vücut ve metin stilleri */
+body {
+    font-family: 'Arial', sans-serif;
+    background-image: linear-gradient(135deg, rgb(40, 43, 45), rgb(42, 45, 47));
+    color: #333;
+}
+
+h1 {
+    font-size: 2.5em;
+    color: #333;
+    font-weight: 600;
+}
+
+
+
+display-4 {
+    margin-top: 10vh;
+}
+.text-dark {
+    --darkreader-text--bs-text-opacity: 1;
+    color: rgb(209, 205, 199) !important;
+}

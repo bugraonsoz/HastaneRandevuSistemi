@@ -1,0 +1,36 @@
+﻿@model List<HastaneRandevuSistemi.Models.AssistantShiftViewModel>
+
+@{
+    Layout = "/Views/Layout/AssistantIndex.cshtml";
+    int count = 0;
+}
+
+<h1>Nöbetlerim</h1>
+<table class="table mt-5">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Ad-Soyad</th>
+            <th scope="col">Departman Adı</th>
+            <th scope="col">Nöbet Tarihi</th>
+			<th scope="col">Nöbet Saati</th>
+			<th scope="col">Telefon No</th>
+            <th scope="col">E-Posta Adresi</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var shift in Model)
+        {
+            count++;
+            <tr>
+                <td>@count</td>
+                <td>@shift.NameSurname</td>
+                <td>@shift.DepartmentName</td>
+                <td>@shift.ShiftDate.ToShortDateString()</td>
+                <td>@shift.ShiftDuration</td>
+                <td>@shift.Phone</td>
+                <td>@shift.Email</td>
+            </tr>
+        }
+    </tbody>
+</table>

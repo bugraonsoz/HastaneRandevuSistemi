@@ -1,0 +1,54 @@
+﻿@model List<AssistantShiftViewModel>
+@{
+	Layout = "/Views/Layout/InstructorIndex.cshtml";
+    int count = 0;
+}
+
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Nöbet Listesi</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-sub">
+                            Nöbetler ile ilgili bilgilere buradan ulaşabilirsiniz:
+                        </div>
+                        <table class="table mt-5">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Ad-Soyad</th>
+                                    <th scope="col">Departman Adı</th>
+                                    <th scope="col">Nöbet Tarihi</th>
+									<th scope="col">Nöbet Saati</th>
+									<th scope="col">Telefon No</th>
+                                    <th scope="col">E-Posta Adresi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @foreach (var shift in Model)
+                                {
+                                    count++;
+                                    <tr>
+                                        <td>@count</td>
+                                        <td>@shift.NameSurname</td>
+                                        <td>@shift.DepartmentName</td>
+                                        <td>@shift.ShiftDate.ToShortDateString()</td>
+                                        <td>@shift.ShiftDuration</td>
+                                        <td>@shift.Phone</td>
+                                        <td>@shift.Email</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
